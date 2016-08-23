@@ -6,7 +6,7 @@ import numpy as np                      #arrays
 
 def scraper():
     
-    #Ashley State Plant Board Weather Web data
+    #Arkansas State Plant Board Weather Web data
     url1 = "http://170.94.200.136/weather/Inversion.aspx"
     response1 = requests.get(url1)
 
