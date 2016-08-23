@@ -5,3 +5,4 @@ numpy==1.11.1
 requests==2.8.1
 requests-toolbelt==0.4.0
 gunicorn==19.6.0
+dj-database-url==0.4.1
