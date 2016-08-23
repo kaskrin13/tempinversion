@@ -2,11 +2,7 @@ import pandas as pd                     #data structures
 from bs4 import BeautifulSoup           #HTML parsing
 import requests                         #HTTP library
 import numpy as np                      #arrays
-from apscheduler.schedulers.blocking import BlockingScheduler
 
-sched = BlockingScheduler()
-#import tornado.web
-#import tornado.ioloop
 
 def scraper():
     
@@ -217,9 +213,3 @@ def scraper():
         out_file.write(str_var) 
         print "SAVED!!!!"
     return data1#, str_var,recommendations
-
-#data = scraper()
-#
-#
-#sched.add_job(scraper, 'interval', seconds=60)
-#sched.start()
