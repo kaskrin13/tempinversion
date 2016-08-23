@@ -199,9 +199,7 @@ def scraper():
     str_var = ""
     with open("C:/Users/Huang.LabTech2/Desktop/hello/polls/templates/test.html", "w") as out_file:
         str_var = str(data1[0:4].to_html())
-        #str_var += "<body text=\"orange\">"
         str_var += "\n"
-        #str_var += "<h1>I SAY THEE NAY...NAY!!!!!!</h1>"
         str_var += "\n"
 #        str_var += "<p>"
 #        str_var += "\n"
