@@ -210,4 +210,4 @@ def scraper():
         str_var += "\n"
         out_file.write(str_var) 
         print "SAVED!!!!"
-    return data1#, str_var,recommendations
+    return array1[3][3]#data1#, str_var,recommendations

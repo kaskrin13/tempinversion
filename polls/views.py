@@ -4,6 +4,6 @@ from WebScraper import scraper
 
 # Create your views here.
 def index(request):
-	scraper()
+	time = scraper()
 	# return HttpResponse("Hello World!")
-	return render_to_response('test.html')
+	return render_to_response('test.html', {'time':str(time)})
