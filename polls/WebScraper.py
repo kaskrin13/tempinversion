@@ -197,7 +197,7 @@ def scraper():
         
     
     str_var = ""
-    with open("templates/test.html", "w") as out_file:
+    with open(r'^polls/templates/test.html', "w") as out_file:
         str_var = str(data1[0:4].to_html())
         str_var += "\n"
         str_var += "\n"
