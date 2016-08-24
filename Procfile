@@ -1,1 +1,1 @@
-web: gunicorn hello:application --log-file=-
+web: gunicorn manage.py --log-file=-
