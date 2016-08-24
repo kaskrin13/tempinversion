@@ -55,7 +55,7 @@ ROOT_URLCONF = 'hello.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['app/polls/templates'],
+        'DIRS': ['polls/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
