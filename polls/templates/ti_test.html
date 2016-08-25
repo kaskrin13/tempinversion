@@ -27,11 +27,38 @@
     This page shows the weather data observed and measured daily up to the current time at each weather station for different location. The temperatures measured at the stations are marked in green if the temperatures are least three degrees higher than the morning low. Then, the temperatures remain green until they are five degrees or more below the daily high. Green marks indicate a low potential for temperature inversion in these locations and aerial application is recommended at the time with green mark. Otherwise, the temperatures are marked in red, which indicates that the potential for temperature inversion is high and aerial application is not recommended in those locations at the time with red mark. 
 
       <p>For the latest observations and calculations, please refresh your browser.</p>
-       
+	<script type="text/javascript">
+      tday=new Array("Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday");
+		tmonth=new Array("January","February","March","April","May","June","July","August","September","October","November","December");
+
+		function GetClock(){
+		var d=new Date();
+		var nday=d.getDay(),nmonth=d.getMonth(),ndate=d.getDate(),nyear=d.getYear();
+		if(nyear<1000) nyear+=1900;
+		var nhour=d.getHours(),nmin=d.getMinutes(),nsec=d.getSeconds(),ap;
+
+		if(nhour==0){ap=" AM";nhour=12;}
+		else if(nhour<12){ap=" AM";}
+		else if(nhour==12){ap=" PM";}
+		else if(nhour>12){ap=" PM";nhour-=12;}
+
+		if(nmin<=9) nmin="0"+nmin;
+		if(nsec<=9) nsec="0"+nsec;
+
+		document.getElementById('clockbox').innerHTML=""+tday[nday]+", "+tmonth[nmonth]+" "+ndate+", "+nyear+" "+nhour+":"+nmin+":"+nsec+ap+"";
+		}
+
+		window.onload=function(){
+		GetClock();
+		setInterval(GetClock,1000);
+		}
+	</script>
+	<div id="clockbox"></div>
+    
    <div>
 	<table cellspacing="0" cellpadding="10" id="MainContent_GridView1"  align="center" style="color:#333333;border-collapse:collapse;">
 		<caption>
-			Today's High/Low Temperatures
+			
 		</caption><tr style="color:White;background-color:#5D7B9D;font-weight:bold;">
 			<th scope="col">Station</th><th scope="col" style="width:45px;">Low Temp  (&#176;F)</th><th scope="col" style="width:65px;">Time Of Low</th><th scope="col" style="width:45px;">Current Temp  (&#176;F)</th><th scope="col" style="width:65px;">Current Time</th><th scope="col" style="width:50px;">Wind Speed (MPH)</th><th scope="col" style="width:45px;">Wind Dir (&#176;)</th><th scope="col" style="width:45px;">High Temp  (&#176;F)</th><th scope="col" style="width:65px;">Time Of High</th>
 		</tr><tr style="color:#333333;background-color:#F7F6F3;">
