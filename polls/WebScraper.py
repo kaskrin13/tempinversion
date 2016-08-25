@@ -2,9 +2,7 @@ import pandas as pd                     #data structures
 from bs4 import BeautifulSoup           #HTML parsing
 import requests                         #HTTP library
 import numpy as np                      #arrays
-from apscheduler.schedulers.blocking import BlockingScheduler
 
-sched = BlockingScheduler()
 #import tornado.web
 #import tornado.ioloop
 
