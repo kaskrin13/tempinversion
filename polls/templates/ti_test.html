@@ -3,6 +3,23 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 
+<div id="header" style="width:100%;background-color:white;height:30px;"></div>
+<div align="center" id="container" style="width:1300px;margin:auto;">
+    <div id="first" style="width:200px;float: left;background-color:white;height:200px;">
+		<p style="float: left;margin:0"><img src="usda_ars_img.jpg" height="150px" width="200px"></p>
+	</div>
+    <div id="second" style="width:500px;float: left;background-color:white;height:200px;font-size: 20pt;">
+		<p style="margin:0;text-align: center;">United States Department of Agriculture</p><p style="margin:0;text-align: center;">Agricultural Research Service</p><p style="margin:0;text-align: center;">Crop Production Systems Research Unit</p><p style="margin:0;text-align: center;">Aerial Application Technology Program</p>
+	</div>
+	<div id="second" style="width:600px;float: left;background-color:white;height:200px;">
+		<p style="text-align: center;margin:0;"><img src="drec_title_bar.jpg"></p>
+		<p style="text-align: center;margin:0;"><img src="drec_msu.jpg"></p>
+		<p style="text-align: center;margin:20"><img src="mspb-logo.jpg"></p>
+	</div>
+    <div id="clear" style ="clear:both;color:white"></div>
+	
+</div>
+
 <div class="aspNetHidden">
 
 	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="79E6444B" />
@@ -11,11 +28,9 @@
         <div class="header">
             <div class="title">
                 <h1 align="center">
-                    Democratic People's Republic of Huang
+                    Daily Temperature Inversion Determination for Aerial Applicators in Mississippi Delta
                 </h1>
-                <h1 align="center">
-                    National Institute for the Correction of Weather
-                </h1>
+                
 				
             </div>
             <div class="clear hideSkiplink">
@@ -60,20 +75,22 @@
 		<caption>
 			
 		</caption><tr style="color:White;background-color:#5B9BD5;font-weight:bold;">
-			<th scope="col">Station</th><th scope="col" style="width:45px;">Low Temp  (&#176;F)</th><th scope="col" style="width:65px;">Time Of Low</th><th scope="col" style="width:45px;">Current Temp  (&#176;F)</th><th scope="col" style="width:65px;">Current Time</th><th scope="col" style="width:50px;">Wind Speed (MPH)</th><th scope="col" style="width:45px;">Wind Dir (&#176;)</th><th scope="col" style="width:45px;">High Temp  (&#176;F)</th><th scope="col" style="width:65px;">Time Of High</th>
+			<th scope="col">Station</th><th scope="col" style="width:45px;">Current Temp  (&#176;F)</th><th scope="col" style="width:65px;">Current Time</th><th scope="col" style="width:50px;">Wind Speed (MPH)</th><th scope="col" style="width:45px;">Wind Dir (&#176;)</th><th scope="col" style="width:45px;">Low Temp  (&#176;F)</th><th scope="col" style="width:65px;">Time Of Low</th><th scope="col" style="width:45px;">High Temp  (&#176;F)</th><th scope="col" style="width:65px;">Time Of High</th>
 		</tr><tr style="color:#333333;background-color:#D2DEEF;">
-			<td>Cleveland</td><td align="center">{{ c1}}</td><td>{{ c2}}</td><td align="center" style="background-color:{{ c_color }};">{{ c3}}</td><td>{{ c4}}</td><td align="center">{{ c5 }}</td><td align="center">{{ c6 }}</td><td align="center">{{ c7 }}</td><td>{{ c8 }}</td>
+			<td>Cleveland</td><td align="center" style="background-color:{{ c_color }};">{{ c3}}</td><td>{{ c4}}</td><td align="center">{{ c5 }}</td><td align="center">{{ c6 }}</td><td align="center">{{ c1}}</td><td>{{ c2}}</td><td align="center">{{ c7 }}</td><td>{{ c8 }}</td>
 		</tr><tr style="color:#284775;background-color:#EAEFF7;">
-			<td>Greenville</td><td align="center">{{ gv1}}</td><td>{{ gv2}}</td><td align="center" style="background-color:{{ gv_color }};">{{ gv3}}</td><td>{{ gv4}}</td><td align="center">{{ gv5 }}</td><td align="center">{{ gv6 }}</td><td align="center">{{ gv7 }}</td><td>{{ gv8 }}</td>
+			<td>Greenville</td><td align="center" style="background-color:{{ gv_color }};">{{ gv3}}</td><td>{{ gv4}}</td><td align="center">{{ gv5 }}</td><td align="center">{{ gv6 }}</td><td align="center">{{ gv1}}</td><td>{{ gv2}}</td><td align="center">{{ gv7 }}</td><td>{{ gv8 }}</td>
 		</tr><tr style="color:#333333;background-color:#D2DEEF;">
-			<td>Greenwood</td><td align="center">{{ gw1}}</td><td>{{ gw2}}</td><td align="center" style="background-color:{{ gw_color }};">{{ gw3}}</td><td>{{ gw4}}</td><td align="center">{{ gw5 }}</td><td align="center">{{ gw6 }}</td><td align="center">{{ gw7 }}</td><td>{{ gw8 }}</td>
+			<td>Greenwood</td><td align="center" style="background-color:{{ gw_color }};">{{ gw3}}</td><td>{{ gw4}}</td><td align="center">{{ gw5 }}</td><td align="center">{{ gw6 }}</td><td align="center">{{ gw1}}</td><td>{{ gw2}}</td><td align="center">{{ gw7 }}</td><td>{{ gw8 }}</td>
 		</tr><tr style="color:#284775;background-color:#EAEFF7;">
-			<td>Stoneville</td><td align="center">{{ s1}}</td><td>{{ s2}}</td><td align="center" style="background-color:{{ s_color }};">{{ s3}}</td><td>{{ s4}}</td><td align="center">{{ s5 }}</td><td align="center">{{ s6 }}</td><td align="center">{{ s7 }}</td><td>{{ s8 }}</td>
+			<td>Stoneville</td><td align="center" style="background-color:{{ s_color }};">{{ s3}}</td><td>{{ s4}}</td><td align="center">{{ s5 }}</td><td align="center">{{ s6 }}</td><td align="center">{{ s1}}</td><td>{{ s2}}</td><td align="center">{{ s7 }}</td><td>{{ s8 }}</td>
 		
 		</tr>
 	</table>
 </div>
-
+<p>  For more information contact Dr. Yanbo Huang at:
+<a href="mailto:Yanbo.Huang@ars.usda.gov" target="_top">Yanbo.Huang@ars.usda.gov</a>
+</p>
         </div>
         <div class="clear">
         </div>
