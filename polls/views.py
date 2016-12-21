@@ -9,4 +9,4 @@ def index(request):
 	return render_to_response('ti_test.html', wd)
 	
 def app(request):
-	return render_to_response('app_page.html')
+	return render(request, 'app_page.html')
