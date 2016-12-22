@@ -7,3 +7,6 @@ def index(request):
 	wd = scraper()
 	# return HttpResponse("Hello World!")
 	return render_to_response('ti_test.html', wd)
+	
+def app(request):
+	return render(request, 'app_page.html')
