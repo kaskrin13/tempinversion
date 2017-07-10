@@ -38,10 +38,10 @@ def scraper():
     CREHiT = float(array1[2][7])
     CREWS = float(array1[2][5])
     
-    CRWLowT = float(array1[4][1])
-    CRWCurT = float(array1[4][3])
-    CRWHiT = float(array1[4][7])
-    CRWWS = float(array1[4][5])    
+    CRWLowT = float(array1[3][1])
+    CRWCurT = float(array1[3][3])
+    CRWHiT = float(array1[3][7])
+    CRWWS = float(array1[3][5])    
 
     dum = array1[:,1:array1.shape[1]]
     wdkeys = ['c1','c2','c3','c4','c5','c6','c7','c8','gv1','gv2','gv3','gv4','gv5','gv6','gv7','gv8','gw1','gw2','gw3','gw4','gw5','gw6','gw7','gw8','s1','s2','s3','s4','s5','s6','s7','s8'] 
