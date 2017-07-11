@@ -19,9 +19,9 @@ def scraper():
     data1.columns = ['Station', 'Low Temp (F)', 'Time of Low', 'Current Temp (F)', 'Current Time',	'Wind Speed (MPH)',	'Wind Dir',	'High Temp (F)', 'Time Of High']
     
     print(url1)
-    print(data1[4:8])
+    print(data1[3:7])
     
-    array1 = np.array(data1[4:8])
+    array1 = np.array(data1[3:7])
     
     AshLowT = float(array1[0][1])
     AshCurT = float(array1[0][3])
