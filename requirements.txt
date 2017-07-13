@@ -1,12 +1,7 @@
-Django==1.10
-beautifulsoup4==4.5.1
-pandas==0.17.0
-numpy==1.11.1
-requests==2.8.1
-requests-toolbelt==0.4.0
+pandas==0.20.3
+Flask==0.12.2
+pytz==2017.2
+requests==2.14.2
+beautifulsoup4==4.6.0
 gunicorn==19.6.0
-dj-database-url==0.4.1
-WhiteNoise==3.2.1
-psycopg2==2.6.2
 html5lib==0.999999999
-lxml==2.3.6
