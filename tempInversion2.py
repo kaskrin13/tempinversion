@@ -148,7 +148,7 @@ def getHighTemp(data):
 
     #Search new list for lowest temp
     for i in range(0, len(data), 1):
-        if data[i][2] < highTemp:
+        if data[i][2] > highTemp:
             highTemp = data[i][2]
             index = i
     return (highTemp, index)
