@@ -100,9 +100,10 @@
                             color: white;
                         }
                         .footer { 
+                            width: 80%;
                             position: absolute;
                             bottom: 0;
-                            height: 50px;
+                            height: 100px;
                         }
                 </style>
 
@@ -159,13 +160,13 @@
                         <thead>
                             <tr>
                                 <th>Station</th>
-                                <th>Most Recent Temp  (&#176;F)</th>
                                 <th>Most Recent Time</th>
+                                <th>Most Recent Temp  (&#176;F)</th>
                                 <th>Wind Speed (MPH)</th>
                                 <th>Low Temp  (&#176;F)</th>
-                                <th>Time Of Low</th>
+                                <th>Time of Low</th>
                                 <th>High Temp  (&#176;F)</th>
-                                <th>Time Of High</th>
+                                <th>Time of High</th>
                             </tr>
                         </thead>
                         <!-- Flask template for table rows -->
@@ -292,6 +293,13 @@
                     long: -90.36
                 };
 
+                var station11 = {
+                    info: '<strong>ARS-1</strong>\
+                                <br> Stoneville, MS<br>',
+                    lat: 33.447664,
+                    long: -90.876153
+                };
+
                 <!-- and here -->
                 var locations = [
                     [station1.info, station1.lat, station1.long, 0]
@@ -304,6 +312,7 @@
                     ,[station8.info, station8.lat, station8.long, 7]
                     ,[station9.info, station9.lat, station9.long, 8]
                     ,[station10.info, station10.lat, station10.long, 9]
+                    ,[station11.info, station11.lat, station11.long, 10]
                 ];
 
                 var map = new google.maps.Map(document.getElementById('map'), {
