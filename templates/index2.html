@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
     <head>
         <title> Temperature Inversion V2 </title>
@@ -21,10 +21,12 @@
             </div>
 
             <div class="main">
-                This page shows the weather data observed and measured every 15 minutes at a local weather station. Green marks indicate a low 
-                potential for temperature inversion in these locations and aerial application is recommended at the time with green mark. Otherwise, 
-                the temperatures are marked in red, which indicates that the potential for temperature inversion is high and aerial application is 
-                not recommended in those locations at the time with red mark.
+                This page shows the weather data observed and measured daily up to the current time at each weather station for different location. 
+                The temperatures measured at the stations are marked in green if the temperatures are least three degrees higher than the morning low. 
+                Then, the temperatures remain green until they are five degrees or more below the daily high. Green marks indicate a low potential for 
+                temperature inversion in these locations and aerial application is recommended at the time with green mark. Otherwise, the temperatures 
+                are marked in red, which indicates that the potential for temperature inversion is high and aerial application is not recommended in 
+                those locations at the time with red mark.
                 <p>Click <a href="#map">here</a> to go to the map.</p>
                 <p>For the latest observations and recommendation, please refresh your browser.</p>
 
@@ -63,13 +65,12 @@
                     html,
                     body,
                         table { 
+                            table-layout: fixed;
                             width: 100%;
-                            margin-left:auto
-                            margin-right:auto
+                            margin:auto;
                             border-collapse: collapse; 
                             cellspacing="0";
                             cellpadding="10";
-                            id="MainContent_GridView1";
                             align="center";
                             style="color:#333333;
                         }
@@ -83,11 +84,12 @@
                             padding: 6px; 
                             text-align: center; 
                             color:#333333;
+                            border-right: 1px solid white;
                         }
 
                         /* Alternate colors for rows */
-                        td:nth-child(even) { background-color: #D2DEEF; }
-                        td:nth-child(odd) { background-color: #EAEFF7; }
+                        tr:nth-child(even) { background-color: #D2DEEF; }
+                        tr:nth-child(odd) { background-color: #EAEFF7; }
 
                         /* Header row formatting */
                         th { 
@@ -105,14 +107,62 @@
                         }
                 </style>
 
+                <!-- Table Mobile CSS -->
+                <style>
+                    @media 
+                    only screen and (max-width: 760px),
+                    (min-device-width: 768px) and (max-device-width: 1024px)  {
+                        /* Force table to not be like tables anymore */
+                        table, thead, tbody, th, td, tr {
+                            display: block;
+                        }
+
+                        /* Hide table headers (but not display: none;, for accessibility) */
+                        thead tr { 
+                            position: absolute;
+                            top: -9999px;
+                            left: -9999px;
+                        }
+
+                        /* Row formatting */
+                        td {
+                            /* Behave  like a "row" */
+                            border: 1px solid #fff;
+                            position: relative;
+                            padding-left: 50%;
+                            background-color: #D2DEEF;
+                        }
+
+                        /* Labels for mobile */
+                        td:before {
+                            /* Now like a table header */
+                            position: absolute;
+                            content: attr(data-title);
+                            /* Top/left values mimic padding */
+                            top: 0px;
+                            left: 0px;
+                            bottom: 0px;
+                            width: 50%;
+                            padding-right: 0px;
+                            background-color: #5B9BD5;
+                            font-weight: bold;
+                            color: white;
+                        }
+
+                        /* Add gap between stations */
+                        tr { padding-bottom: 10px; }
+                    }
+                </style>
+                
+
                 <!-- Table code --> 
-                <div overflow-x:auto;>
+                <div>
                     <table>
                         <thead>
                             <tr>
                                 <th>Station</th>
-                                <th>Most Recent Temp  (&#176;F)</th>
                                 <th>Most Recent Time</th>
+                                <th>Most Recent Temp  (&#176;F)</th>
                                 <th>Wind Speed (MPH)</th>
                                 <th>Low Temp  (&#176;F)</th>
                                 <th>Time of Low</th>
