@@ -416,7 +416,9 @@ def main():
             ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/DREC-2001", "Lyon"),
             ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/DREC-2011", "Jackson Co."),
             ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/DREC-2006", "Brooksville"),
-            ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/DREC-2010", "Bee Lake")]
+            ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/DREC-2010", "Bee Lake"),
+            ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/DREC-2004", "Stoneville AWS"),
+            ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/DREC-2014", "Stoneville W")]
 
     csvURLs = [("https://thingspeak.com/channels/211013/feed.csv", "Stoneville 1"),
                ("https://thingspeak.com/channels/282031/feed.csv", "Stoneville 2"),
