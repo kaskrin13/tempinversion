@@ -419,12 +419,13 @@ def main():
             ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/DREC-2010", "Bee Lake"),
             ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/DREC-2004", "Stoneville AWS"),
             ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/DREC-2014", "Stoneville W")]
-
-    csvURLs = [("https://thingspeak.com/channels/211013/feed.csv", "Stoneville ARS 1"),
-               ("https://thingspeak.com/channels/282031/feed.csv", "Stoneville ARS 2"),
-               ("https://thingspeak.com/channels/216976/feed.csv", "Stoneville ARS 3"),
-               ("https://thingspeak.com/channels/287811/feed.csv", "Stoneville ARS 2B"),
-               ("https://thingspeak.com/channels/288782/feed.csv", "Stoneville ARS 3B")]
+    
+    # uncomment to add ARS weather stations back
+    #csvURLs = [("https://thingspeak.com/channels/211013/feed.csv", "Stoneville ARS 1"),
+    #           ("https://thingspeak.com/channels/282031/feed.csv", "Stoneville ARS 2"),
+    #           ("https://thingspeak.com/channels/216976/feed.csv", "Stoneville ARS 3"),
+    #           ("https://thingspeak.com/channels/287811/feed.csv", "Stoneville ARS 2B"),
+    #           ("https://thingspeak.com/channels/288782/feed.csv", "Stoneville ARS 3B")]
 
     results = []
 
