@@ -407,18 +407,18 @@ def tempInvFromCSV(data):
 
 
 def main():
-    htmlURLs = [("http://deltaweather.extension.msstate.edu/7-days-hourly-table/DREC-2005", "Verona"),
-            ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/DREC-2013", "Mound Bayou"),
-            ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/DREC-2002", "Thighman Lake"),
-            ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/DREC-2012", "Stockett Farm"),
-            ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/DREC-2003", "Sidon"),
-            ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/DREC-2007", "Prairie"),
-            ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/DREC-2001", "Lyon"),
-            ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/DREC-2011", "Jackson Co."),
-            ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/DREC-2006", "Brooksville"),
-            ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/DREC-2010", "Bee Lake"),
-            ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/DREC-2004", "Stoneville AWS"),
-            ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/DREC-2014", "Stoneville W")]
+    htmlURLs = [("http://deltaweather.extension.msstate.edu/7-days-hourly-table/DREC-2010", "Bee Lake"),
+                ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/DREC-2006", "Brooksville"),
+                ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/DREC-2011", "Jackson Co."),
+                ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/DREC-2001", "Lyon"),
+                ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/DREC-2013", "Mound Bayou"),
+                ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/DREC-2007", "Prairie"),
+                ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/DREC-2003", "Sidon"),
+                ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/DREC-2012", "Stockett Farm"),
+                ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/DREC-2004", "Stoneville AWS"),
+                ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/DREC-2014", "Stoneville W"),
+                ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/DREC-2002", "Thighman Lake"),
+                ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/DREC-2005", "Verona")]
     
     # uncomment to add ARS weather stations back
     #csvURLs = [("https://thingspeak.com/channels/211013/feed.csv", "Stoneville ARS 1"),
