@@ -192,12 +192,13 @@ def utcToLocal(utc):
 # output: moreThanAnHour = boolean
 def updatedLastHour(mostRecentTime):
     # Convert now from UTC to central time
-    # now = utcToLocal(datetime.datetime.now())
+    now = utcToLocal(datetime.datetime.now())
 
     # Use the following code for local hosting/error checking because
     # otherwise 5/6 hours will be subtracted from the current time on the computer
     # and the fuction will always return false
-    now = pytz.utc.localize(datetime.datetime.utcnow())
+    #now = pytz.utc.localize(datetime.datetime.utcnow())
+    
     delta = now - mostRecentTime
 
     # Check if more than an hour has passed
