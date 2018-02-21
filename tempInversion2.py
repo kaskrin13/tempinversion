@@ -208,7 +208,6 @@ def updatedLastHour(mostRecentTime):
     #now = pytz.utc.localize(datetime.datetime.utcnow())
     
     delta = now - mostRecentTime
-    print(delta.seconds/60)
 
     # Check if more than an hour has passed
     if (delta.seconds / 60) < 60:
@@ -454,6 +453,7 @@ def main():
     #    result = tempInvFromCSV(data)
     #    result.append(url[1])
     #    results.append(result)
+    printResults(results)
 
     return results
 
