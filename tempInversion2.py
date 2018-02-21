@@ -70,13 +70,16 @@ def getDataFromHTML(url):
             data[i][7] = float('NaN')
         else:
             data[i][7] = float(data[i][7])
-            
-    print(data)
-    sys.stdout.flush()
 
     # place data from today's date in a seperate table
     todaysData = []
     today = datetime.datetime.today()
+    print("Data Date")
+    print(datetime.datetime.strptime(row[0], '%m/%d/%Y').date())
+    print("Today")
+    print(datetime.datetime.today())
+    print()
+    sys.stdout.flush()
     for row in data[1:]:
         if (today.date() == datetime.datetime.strptime(row[0], '%m/%d/%Y').date()):
             todaysData.append(row)
