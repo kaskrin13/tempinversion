@@ -195,9 +195,9 @@ def makeTimeAware(time):
     timezone = 'America/Chicago'
     tz = pytz.timezone('America/Chicago')
     if (daylightSavings(timezone)):
-        return tz.localize(utc, is_dst=True).astimezone(tz)
+        return tz.localize(time, is_dst=True).astimezone(tz)
     else:
-        return tz.localize(utc, is_dst=False).astimezone(tz)
+        return tz.localize(time, is_dst=False).astimezone(tz)
 
 # checks if more than an hour has passed since the data was last updated
 # returns true if it has, false if not
