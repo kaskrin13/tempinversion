@@ -208,9 +208,10 @@ def updatedLastHour(mostRecentTime):
     #now = pytz.utc.localize(datetime.datetime.utcnow())
     
     delta = now - mostRecentTime
+    print(delta.seconds/60)
 
     # Check if more than an hour has passed
-    if (delta.seconds / 60) > 60:
+    if (delta.seconds / 60) < 60:
         moreThanAnHour = True
     else:
         moreThanAnHour = False
@@ -325,40 +326,40 @@ def tempInvFromHTML(data):
         if (mostRecentTemp - lowTemp[0] > 3):
             # no inversion and spray OK
             return [False, mostRecentTemp, str(mostRecentTime.time()), mostRecentWindSpeed, lowTemp[0],
-                    data[lowTemp[1]][5], highTemp[0], data[highTemp[1]][3], moreThanAnHour]
+                    data[lowTemp[1]][5], highTemp[0], data[highTemp[1]][3], moreThanAnHour[0]]
         else:
             if ((mostRecentTemp - lowTemp[0]) < 2):
                 # strong inversion and no spray suggested
                 return [True, mostRecentTemp, str(mostRecentTime.time()), mostRecentWindSpeed, lowTemp[0],
-                        data[lowTemp[1]][5], highTemp[0], data[highTemp[1]][3], moreThanAnHour]
+                        data[lowTemp[1]][5], highTemp[0], data[highTemp[1]][3], moreThanAnHour[0]]
             else:
                 if ((mostRecentTemp - lowTemp[0]) < 2 and mostRecentWindSpeed > 4):
                     # no inversion and spray OK
                     return [False, mostRecentTemp, str(mostRecentTime.time()), mostRecentWindSpeed, lowTemp[0],
-                            data[lowTemp[1]][5], highTemp[0], data[highTemp[1]][3], moreThanAnHour]
+                            data[lowTemp[1]][5], highTemp[0], data[highTemp[1]][3], moreThanAnHour[0]]
                 else:
                     # strong inversion and no spray suggested
                     return [True, mostRecentTemp, str(mostRecentTime.time()), mostRecentWindSpeed, lowTemp[0],
-                            data[lowTemp[1]][5], highTemp[0], data[highTemp[1]][3], moreThanAnHour]
+                            data[lowTemp[1]][5], highTemp[0], data[highTemp[1]][3], moreThanAnHour[0]]
     else:
         if ((highTemp[0] - mostRecentTemp) <= 5):
             # no inversion and spray OK
             return [False, mostRecentTemp, str(mostRecentTime.time()), mostRecentWindSpeed, lowTemp[0],
-                    data[lowTemp[1]][5], highTemp[0], data[highTemp[1]][3], moreThanAnHour]
+                    data[lowTemp[1]][5], highTemp[0], data[highTemp[1]][3], moreThanAnHour[0]]
         else:
             if ((highTemp[0] - mostRecentTemp) >= 7):
                 # strong inversion and no spray suggested
                 return [True, mostRecentTemp, str(mostRecentTime.time()), mostRecentWindSpeed, lowTemp[0],
-                        data[lowTemp[1]][5], highTemp[0], data[highTemp[1]][3], moreThanAnHour]
+                        data[lowTemp[1]][5], highTemp[0], data[highTemp[1]][3], moreThanAnHour[0]]
             else:
                 if (mostRecentTemp - highTemp[0]) >= 7 and mostRecentWindSpeed > 4:
                     # no inversion and spray OK
                     return [False, mostRecentTemp, str(mostRecentTime.time()), mostRecentWindSpeed, lowTemp[0],
-                            data[lowTemp[1]][5], highTemp[0], data[highTemp[1]][3], moreThanAnHour]
+                            data[lowTemp[1]][5], highTemp[0], data[highTemp[1]][3], moreThanAnHour[0]]
                 else:
                     # strong inversion and no spray suggested
                     return [True, mostRecentTemp, str(mostRecentTime.time()), mostRecentWindSpeed, lowTemp[0],
-                            data[lowTemp[1]][5], highTemp[0], data[highTemp[1]][3], moreThanAnHour]
+                            data[lowTemp[1]][5], highTemp[0], data[highTemp[1]][3], moreThanAnHour[0]]
 
 # determines whether there is a temperature inversion
 # returns true if there is an inversion or false if not
@@ -446,7 +447,14 @@ def main():
         result = tempInvFromHTML(data)
         results.append(result)
         results[i].append(htmlURLs[i][1])
+
+        print(htmlURLs[i][1])
+        print()
         printData(data)
+        print()
+        print(result)
+        print()
+        print()
 
     # uncomment to add ARS weather stations back
     #for url in csvURLs:
