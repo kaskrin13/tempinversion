@@ -450,7 +450,10 @@ def main():
 
         print(htmlURLs[i][1])
         print()
-        printData(data)
+        if data:
+            printData(data)
+        else:
+            print("No data")
         print()
         print(result)
         print()
