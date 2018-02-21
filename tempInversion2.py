@@ -8,6 +8,7 @@ import requests
 import urllib.request
 import codecs
 import csv
+import sys
 
 
 # goes to a website, finds a table on the page and inserts it into a 2d list
