@@ -208,6 +208,7 @@ def updatedLastHour(mostRecentTime):
     #now = pytz.utc.localize(datetime.datetime.utcnow())
     
     delta = now - mostRecentTime
+    print(delta.seconds/60)
 
     # Check if more than an hour has passed
     if (delta.seconds / 60) > 60:
