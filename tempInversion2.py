@@ -8,7 +8,7 @@ import requests
 import urllib.request
 import codecs
 import csv
-
+import sys
 
 # goes to a website, finds a table on the page and inserts it into a 2d list
 # then processes the data added to table (covert text to necessary formats)
@@ -207,6 +207,8 @@ def updatedLastHour(mostRecentTime):
     now = utcToLocal(datetime.datetime.utcnow())
     
     delta = now - mostRecentTime
+    print(delta.seconds/60)
+    sys.stdout.flush()
 
     # Check if more than an hour has passed
     if (delta.seconds / 60) > 60:
