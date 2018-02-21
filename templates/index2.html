@@ -134,7 +134,7 @@
                             {% for result in results %}
                             <tr>
                                 <td class="header" data-title="Station">{{ result[9] }}</td>
-                                {% if result[8] == False %}
+                                {% if result[8] == True %}
                                     {% if result[0] == True %}
                                         <td data-title="Most Recent Temp" style="background-color:Crimson;">{{ result[1] }}</td>
                                     {% else %}
