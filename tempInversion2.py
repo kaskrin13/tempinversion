@@ -77,7 +77,7 @@ def getDataFromHTML(url):
     print("Data Date")
     print(datetime.datetime.strptime(row[0], '%m/%d/%Y').date())
     print("Today")
-    print(datetime.datetime.today())
+    print(today)
     print()
     sys.stdout.flush()
     for row in data[1:]:
