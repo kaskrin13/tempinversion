@@ -447,8 +447,6 @@ def main():
         results.append(tempInvFromHTML(data))
         results[i].append(htmlURLs[i][1])
 
-    printResults(results)
-
     # uncomment to add ARS weather stations back
     #for url in csvURLs:
     #    data = getDataFromCSV(url[0])
