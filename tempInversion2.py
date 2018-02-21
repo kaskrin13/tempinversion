@@ -458,6 +458,7 @@ def main():
         print(result)
         print()
         print()
+        sys.stdout.flush()
 
     # uncomment to add ARS weather stations back
     #for url in csvURLs:
