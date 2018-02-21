@@ -207,7 +207,7 @@ def makeTimeAware(time):
 # output: moreThanAnHour = boolean
 def updatedLastHour(mostRecentTime):
     # Convert now from UTC to central time
-    now = utcToLocal(datetime.datetime.now())
+    now = utcToLocal(datetime.datetime.utcnow())
 
     # Use the following code for local hosting/error checking because
     # otherwise 5/6 hours will be subtracted from the current time on the computer
