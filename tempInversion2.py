@@ -344,7 +344,7 @@ def tempInvFromHTML(data):
         if ((highTemp[0] - mostRecentTemp) <= 5):
             # no inversion and spray OK
             return [False, mostRecentTemp, str(mostRecentTime.time()), mostRecentWindSpeed, lowTemp[0],
-                    data[lowTemp[1]][5], highTemp[0], data[highTemp[1]][3], moreThanAnHour, seconds, seconds]
+                    data[lowTemp[1]][5], highTemp[0], data[highTemp[1]][3], moreThanAnHour, seconds]
         else:
             if ((highTemp[0] - mostRecentTemp) >= 7):
                 # strong inversion and no spray suggested
