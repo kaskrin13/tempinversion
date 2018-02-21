@@ -211,7 +211,7 @@ def updatedLastHour(mostRecentTime):
     sys.stdout.flush()
 
     # Check if more than an hour and 10 minutes has passed
-    if (delta.seconds / 60) > 70:
+    if (delta.seconds / 60) > 75:
         moreThanAnHour = True
     else:
         moreThanAnHour = False
