@@ -302,7 +302,7 @@ def getHighTempFromCSV(mostRecentTime, data):
 def tempInvFromHTML(data):
     # Check if data is empty
     # If it is, return empty result
-    if (data):
+    if (not data):
         return [True, 0, 0, 0, 0, 0, 0, 0, True]
 
     # Get most recent data
