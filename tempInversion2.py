@@ -8,7 +8,6 @@ import requests
 import urllib.request
 import codecs
 import csv
-import sys
 
 
 # goes to a website, finds a table on the page and inserts it into a 2d list
@@ -206,27 +205,15 @@ def makeTimeAware(time):
 def updatedLastHour(mostRecentTime):
     # Convert now from UTC to central time
     now = utcToLocal(datetime.datetime.utcnow())
-    print("now")
-    print(now)
-    print("most recent")
-    print(mostRecentTime)
-    sys.stdout.flush()
-
-    # Use the following code for local hosting/error checking because
-    # otherwise 5/6 hours will be subtracted from the current time on the computer
-    # and the fuction will always return false
-    #now = pytz.utc.localize(datetime.datetime.utcnow())
     
     delta = now - mostRecentTime
-    print(delta.seconds/60)
-    sys.stdout.flush()
 
     # Check if more than an hour has passed
     if (delta.seconds / 60) > 60:
         moreThanAnHour = True
     else:
         moreThanAnHour = False
-    return (moreThanAnHour, delta.seconds/60)
+    return moreThanAnHour
 
 
 # gets lowest temperature of the day by
@@ -337,40 +324,40 @@ def tempInvFromHTML(data):
         if (mostRecentTemp - lowTemp[0] > 3):
             # no inversion and spray OK
             return [False, mostRecentTemp, str(mostRecentTime.time()), mostRecentWindSpeed, lowTemp[0],
-                    data[lowTemp[1]][5], highTemp[0], data[highTemp[1]][3], moreThanAnHour[0]]
+                    data[lowTemp[1]][5], highTemp[0], data[highTemp[1]][3], moreThanAnHour]
         else:
             if ((mostRecentTemp - lowTemp[0]) < 2):
                 # strong inversion and no spray suggested
                 return [True, mostRecentTemp, str(mostRecentTime.time()), mostRecentWindSpeed, lowTemp[0],
-                        data[lowTemp[1]][5], highTemp[0], data[highTemp[1]][3], moreThanAnHour[0]]
+                        data[lowTemp[1]][5], highTemp[0], data[highTemp[1]][3], moreThanAnHour]
             else:
                 if ((mostRecentTemp - lowTemp[0]) < 2 and mostRecentWindSpeed > 4):
                     # no inversion and spray OK
                     return [False, mostRecentTemp, str(mostRecentTime.time()), mostRecentWindSpeed, lowTemp[0],
-                            data[lowTemp[1]][5], highTemp[0], data[highTemp[1]][3], moreThanAnHour[0]]
+                            data[lowTemp[1]][5], highTemp[0], data[highTemp[1]][3], moreThanAnHour]
                 else:
                     # strong inversion and no spray suggested
                     return [True, mostRecentTemp, str(mostRecentTime.time()), mostRecentWindSpeed, lowTemp[0],
-                            data[lowTemp[1]][5], highTemp[0], data[highTemp[1]][3], moreThanAnHour[0]]
+                            data[lowTemp[1]][5], highTemp[0], data[highTemp[1]][3], moreThanAnHour]
     else:
         if ((highTemp[0] - mostRecentTemp) <= 5):
             # no inversion and spray OK
             return [False, mostRecentTemp, str(mostRecentTime.time()), mostRecentWindSpeed, lowTemp[0],
-                    data[lowTemp[1]][5], highTemp[0], data[highTemp[1]][3], moreThanAnHour[0]]
+                    data[lowTemp[1]][5], highTemp[0], data[highTemp[1]][3], moreThanAnHour]
         else:
             if ((highTemp[0] - mostRecentTemp) >= 7):
                 # strong inversion and no spray suggested
                 return [True, mostRecentTemp, str(mostRecentTime.time()), mostRecentWindSpeed, lowTemp[0],
-                        data[lowTemp[1]][5], highTemp[0], data[highTemp[1]][3], moreThanAnHour[0]]
+                        data[lowTemp[1]][5], highTemp[0], data[highTemp[1]][3], moreThanAnHour]
             else:
                 if (mostRecentTemp - highTemp[0]) >= 7 and mostRecentWindSpeed > 4:
                     # no inversion and spray OK
                     return [False, mostRecentTemp, str(mostRecentTime.time()), mostRecentWindSpeed, lowTemp[0],
-                            data[lowTemp[1]][5], highTemp[0], data[highTemp[1]][3], moreThanAnHour[0]]
+                            data[lowTemp[1]][5], highTemp[0], data[highTemp[1]][3], moreThanAnHour]
                 else:
                     # strong inversion and no spray suggested
                     return [True, mostRecentTemp, str(mostRecentTime.time()), mostRecentWindSpeed, lowTemp[0],
-                            data[lowTemp[1]][5], highTemp[0], data[highTemp[1]][3], moreThanAnHour[0]]
+                            data[lowTemp[1]][5], highTemp[0], data[highTemp[1]][3], moreThanAnHour]
 
 # determines whether there is a temperature inversion
 # returns true if there is an inversion or false if not
