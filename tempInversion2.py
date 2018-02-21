@@ -73,7 +73,7 @@ def getDataFromHTML(url):
 
     # place data from today's date in a seperate table
     todaysData = []
-    today = datetime.datetime.today()
+    today = utcToLocal(datetime.datetime.today())
     print("Data Date")
     print(datetime.datetime.strptime(row[0], '%m/%d/%Y').date())
     print("Today")
