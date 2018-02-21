@@ -214,7 +214,7 @@ def updatedLastHour(mostRecentTime):
         moreThanAnHour = True
     else:
         moreThanAnHour = False
-    return moreThanAnHour
+    return (moreThanAnHour, delta.seconds/60)
 
 
 # gets lowest temperature of the day by
@@ -309,7 +309,7 @@ def tempInvFromHTML(data):
     mostRecentTime = datetime.datetime.strptime(data[-1][0] + " " + data[-1][1], '%m/%d/%Y %H:%M:%S')
 
     # check if the data has been updated recently
-    moreThanAnHour = updatedLastHour(makeTimeAware(mostRecentTime))
+    (moreThanAnHour, seconds) = updatedLastHour(makeTimeAware(mostRecentTime))
 
     # Get most recent temperature and wind speed
     mostRecentTemp = data[-1][6]
@@ -330,35 +330,35 @@ def tempInvFromHTML(data):
             if ((mostRecentTemp - lowTemp[0]) < 2):
                 # strong inversion and no spray suggested
                 return [True, mostRecentTemp, str(mostRecentTime.time()), mostRecentWindSpeed, lowTemp[0],
-                        data[lowTemp[1]][5], highTemp[0], data[highTemp[1]][3], moreThanAnHour]
+                        data[lowTemp[1]][5], highTemp[0], data[highTemp[1]][3], moreThanAnHour, seconds]
             else:
                 if ((mostRecentTemp - lowTemp[0]) < 2 and mostRecentWindSpeed > 4):
                     # no inversion and spray OK
                     return [False, mostRecentTemp, str(mostRecentTime.time()), mostRecentWindSpeed, lowTemp[0],
-                            data[lowTemp[1]][5], highTemp[0], data[highTemp[1]][3], moreThanAnHour]
+                            data[lowTemp[1]][5], highTemp[0], data[highTemp[1]][3], moreThanAnHour, seconds]
                 else:
                     # strong inversion and no spray suggested
                     return [True, mostRecentTemp, str(mostRecentTime.time()), mostRecentWindSpeed, lowTemp[0],
-                            data[lowTemp[1]][5], highTemp[0], data[highTemp[1]][3], moreThanAnHour]
+                            data[lowTemp[1]][5], highTemp[0], data[highTemp[1]][3], moreThanAnHour, seconds]
     else:
         if ((highTemp[0] - mostRecentTemp) <= 5):
             # no inversion and spray OK
             return [False, mostRecentTemp, str(mostRecentTime.time()), mostRecentWindSpeed, lowTemp[0],
-                    data[lowTemp[1]][5], highTemp[0], data[highTemp[1]][3], moreThanAnHour]
+                    data[lowTemp[1]][5], highTemp[0], data[highTemp[1]][3], moreThanAnHour, seconds, seconds]
         else:
             if ((highTemp[0] - mostRecentTemp) >= 7):
                 # strong inversion and no spray suggested
                 return [True, mostRecentTemp, str(mostRecentTime.time()), mostRecentWindSpeed, lowTemp[0],
-                        data[lowTemp[1]][5], highTemp[0], data[highTemp[1]][3], moreThanAnHour]
+                        data[lowTemp[1]][5], highTemp[0], data[highTemp[1]][3], moreThanAnHour, seconds]
             else:
                 if (mostRecentTemp - highTemp[0]) >= 7 and mostRecentWindSpeed > 4:
                     # no inversion and spray OK
                     return [False, mostRecentTemp, str(mostRecentTime.time()), mostRecentWindSpeed, lowTemp[0],
-                            data[lowTemp[1]][5], highTemp[0], data[highTemp[1]][3], moreThanAnHour]
+                            data[lowTemp[1]][5], highTemp[0], data[highTemp[1]][3], moreThanAnHour, seconds]
                 else:
                     # strong inversion and no spray suggested
                     return [True, mostRecentTemp, str(mostRecentTime.time()), mostRecentWindSpeed, lowTemp[0],
-                            data[lowTemp[1]][5], highTemp[0], data[highTemp[1]][3], moreThanAnHour]
+                            data[lowTemp[1]][5], highTemp[0], data[highTemp[1]][3], moreThanAnHour, seconds]
 
 # determines whether there is a temperature inversion
 # returns true if there is an inversion or false if not
@@ -369,7 +369,7 @@ def tempInvFromCSV(data):
     mostRecentWindSpeed = float(data[-1][3])
 
     # check if the data has been updated recently
-    moreThanAnHour = updatedLastHour(mostRecentTime)
+    moreThanAnHour = updatedLastHour(mostRecentTime)[0]
 
     # Get high and low temp
     lowTemp = getLowTempFromCSV(mostRecentTime, data)
@@ -446,6 +446,7 @@ def main():
         result = tempInvFromHTML(data)
         results.append(result)
         results[i].append(htmlURLs[i][1])
+        printResult(result)
 
     # uncomment to add ARS weather stations back
     #for url in csvURLs:
