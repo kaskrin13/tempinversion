@@ -74,12 +74,7 @@ def getDataFromHTML(url):
     # place data from today's date in a seperate table
     todaysData = []
     today = utcToLocal(datetime.datetime.utcnow())
-    print("Data Date")
-    print(datetime.datetime.strptime(row[0], '%m/%d/%Y').date())
-    print("Today")
-    print(today)
-    print()
-    sys.stdout.flush()
+
     for row in data[1:]:
         if (today.date() == datetime.datetime.strptime(row[0], '%m/%d/%Y').date()):
             todaysData.append(row)
@@ -208,6 +203,11 @@ def makeTimeAware(time):
 def updatedLastHour(mostRecentTime):
     # Convert now from UTC to central time
     now = utcToLocal(datetime.datetime.utcnow())
+    print("now")
+    print(now)
+    print("most recent")
+    print(mostRecentTime)
+    sys.stdout.flush()
 
     # Use the following code for local hosting/error checking because
     # otherwise 5/6 hours will be subtracted from the current time on the computer
