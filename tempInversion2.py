@@ -71,7 +71,7 @@ def getDataFromHTML(url):
         else:
             data[i][7] = float(data[i][7])
             
-    print(todaysData)
+    print(data)
     sys.stdout.flush()
 
     # place data from today's date in a seperate table
