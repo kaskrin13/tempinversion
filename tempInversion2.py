@@ -20,9 +20,6 @@ def getDataFromHTML(url):
     # get html from website
     html = requests.get(url)
 
-    print(html.text)
-    sys.stdout.flush()
-
     # get table from html
     data = [[cell.text.strip() for cell in row('td')] for row in bs4.BeautifulSoup(html.content, "html5lib")('tr')]
     # add column labels
@@ -80,6 +77,9 @@ def getDataFromHTML(url):
     for row in data[1:]:
         if (today.date() == datetime.datetime.strptime(row[0], '%m/%d/%Y').date()):
             todaysData.append(row)
+            
+    print(todaysData)
+    sys.stdout.flush()
 
     return todaysData
 
