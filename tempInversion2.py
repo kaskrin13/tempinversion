@@ -215,6 +215,8 @@ def updatedLastHour(mostRecentTime):
     #now = pytz.utc.localize(datetime.datetime.utcnow())
     
     delta = now - mostRecentTime
+    print(delta.seconds/60)
+    sys.stdout.flush()
 
     # Check if more than an hour has passed
     if (delta.seconds / 60) > 60:
@@ -453,12 +455,6 @@ def main():
         result = tempInvFromHTML(data)
         results.append(result)
         results[i].append(htmlURLs[i][1])
-
-        if data:
-            printData(data)
-        else:
-            print("No data")
-        sys.stdout.flush()
 
     # uncomment to add ARS weather stations back
     #for url in csvURLs:
