@@ -20,6 +20,9 @@ def getDataFromHTML(url):
     # get html from website
     html = requests.get(url)
 
+    print(html.text)
+    sys.stdout.flush()
+
     # get table from html
     data = [[cell.text.strip() for cell in row('td')] for row in bs4.BeautifulSoup(html.content, "html5lib")('tr')]
     # add column labels
@@ -209,7 +212,6 @@ def updatedLastHour(mostRecentTime):
     #now = pytz.utc.localize(datetime.datetime.utcnow())
     
     delta = now - mostRecentTime
-    print(delta.seconds/60)
 
     # Check if more than an hour has passed
     if (delta.seconds / 60) > 60:
@@ -449,16 +451,10 @@ def main():
         results.append(result)
         results[i].append(htmlURLs[i][1])
 
-        print(htmlURLs[i][1])
-        print()
         if data:
             printData(data)
         else:
             print("No data")
-        print()
-        print(result)
-        print()
-        print()
         sys.stdout.flush()
 
     # uncomment to add ARS weather stations back
