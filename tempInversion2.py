@@ -184,8 +184,8 @@ def utcToLocal(utc):
     tz = pytz.timezone('America/Chicago')
     if (daylightSavings(timezone)):
         return pytz.utc.localize(utc, is_dst=True).astimezone(tz)
-    else:
-        return pytz.utc.localize(utc, is_dst=False).astimezone(tz)
+    #else:
+    #    return pytz.utc.localize(utc, is_dst=False).astimezone(tz)
 
 # makes a datetime object timezone aware
 # input: time = datetime
@@ -195,8 +195,8 @@ def makeTimeAware(time):
     tz = pytz.timezone('America/Chicago')
     if (daylightSavings(timezone)):
         return tz.localize(time, is_dst=True).astimezone(tz)
-    else:
-        return tz.localize(time, is_dst=False).astimezone(tz)
+    #else:
+    #    return tz.localize(time, is_dst=False).astimezone(tz)
 
 # checks if more than an hour has passed since the data was last updated
 # returns true if it has, false if not
@@ -211,7 +211,7 @@ def updatedLastHour(mostRecentTime):
     sys.stdout.flush()
 
     # Check if more than an two hours and ten minutes has passed
-    if (delta.seconds / 60) > 130:
+    if (delta.seconds / 60) > 190:
         moreThanAnHour = True
     else:
         moreThanAnHour = False
