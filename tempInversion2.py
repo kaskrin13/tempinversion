@@ -183,7 +183,7 @@ def utcToLocal(utc):
     timezone = 'America/Chicago'
     tz = pytz.timezone('America/Chicago')
     if (daylightSavings(timezone)):
-        return pytz.utc.localize(utc, is_dst=False).astimezone(tz)
+        return pytz.utc.localize(utc).astimezone(tz)
     #else:
     #    return pytz.utc.localize(utc, is_dst=False).astimezone(tz)
 
@@ -194,7 +194,7 @@ def makeTimeAware(time):
     timezone = 'America/Chicago'
     tz = pytz.timezone('America/Chicago')
     if (daylightSavings(timezone)):
-        return tz.localize(time, is_dst=False).astimezone(tz)
+        return tz.localize(time).astimezone(tz)
     #else:
     #    return tz.localize(time, is_dst=False).astimezone(tz)
 
