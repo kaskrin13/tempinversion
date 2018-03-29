@@ -196,7 +196,7 @@ def makeTimeAware(time):
     if (not daylightSavings(timezone)):
         return tz.localize(time, is_dst=True).astimezone(tz)
     else:
-        return tz.localize(time, is_dst=False).astimezone(tz) + datetime.timedelta(hours = 1)
+        return tz.localize(time, is_dst=False).astimezone(tz)
 
 # checks if more than an hour has passed since the data was last updated
 # returns true if it has, false if not
