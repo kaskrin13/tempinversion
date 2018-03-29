@@ -124,9 +124,9 @@
                                 <th>Wind Speed (MPH)</th>
                                 <th>Time</th>
                                 <th>Low Temperature  (&#176;F)</th>
-                                <th>Time of Low Temperature</th>
+                                <th>Time of Low Temperature (CST)</th>
                                 <th>High Temperature  (&#176;F)</th>
-                                <th>Time of High Temperature</th>
+                                <th>Time of High Temperature(CST)</th>
                             </tr>
                         </thead>
                         <!-- Flask template for table rows -->
@@ -143,9 +143,9 @@
                                     <td data-title="Wind Speed (MPH)">{{ result[3] }}</td>
                                     <td data-title="Temperature">{{ result[2] }}</td>
                                     <td data-title="Low Temperature  (°F)">{{ result[4] }}</td>
-                                    <td data-title="Time of Low Temperature">{{ result[5] }}</td>
+                                    <td data-title="Time of Low Temperature (CST)">{{ result[5] }}</td>
                                     <td data-title="High Temperature (°F)">{{ result[6] }}</td>
-                                    <td data-title="Time of High Temperature">{{ result[7] }}</td>
+                                    <td data-title="Time of High Temperature (CST)">{{ result[7] }}</td>
                                 {% else %}
                                     <td colspan="7" style="background-color:red;">The station is temporarily not working, and will be back up shortly</td>
                                 {% endif %}
