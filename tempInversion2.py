@@ -184,8 +184,8 @@ def utcToLocal(utc):
     tz = pytz.timezone('America/Chicago')
     if (daylightSavings(timezone)):
         return pytz.utc.localize(utc).astimezone(tz)
-    #else:
-    #    return pytz.utc.localize(utc, is_dst=False).astimezone(tz)
+    else:
+        return pytz.utc.localize(utc, is_dst=False).astimezone(tz)
 
 # makes a datetime object timezone aware
 # input: time = datetime
