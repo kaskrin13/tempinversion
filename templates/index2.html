@@ -1,187 +1,201 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-    <head>
-        <title> Temperature Inversion V2 </title>
-    </head>
 
-    <body>
-        <div id="header"></div>
-        <div class="aspNetHidden">
-            <input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="79E6444B">
-        </div>
+<head>
+    <title> Temperature Inversion V2 </title>
+</head>
 
-        <div class="page">
-            <div class="header">
-                <div class="title">
-                    <h1 align="center">
+<body>
+    <div id="header"></div>
+    <div class="aspNetHidden">
+        <input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="79E6444B">
+    </div>
+
+    <div class="page">
+        <div class="header">
+            <div class="title">
+                <h1 align="center">
                         Daily Determination of Atmospheric Stability for Aerial Applicators in the Mississippi Delta
                     </h1>
-                </div>
-            </div>
-
-            <div class="main">
-                This page provides weather data of interest to aerial applicators at various weather station locations in the Mississippi Delta and surrounding areas.  
-                Data include the most recent hourly measurements of air temperature and wind speed, as well as daily low and high temperature 
-                information up to the current time.  In the second column, the latest temperature measurements are shown along with a color to 
-                indicate conditions for aerial applications.  Green indicates a low potential for temperature inversion based on our background 
-                calculations, and conditions are favorable for aerial application currently at that location.  Red indicates a high potential for 
-                temperature inversion, and aerial application is not recommended currently at that location.
-                
-                <p>Click <a href="#map">here</a> to go to the map.</p>
-                <p>For the latest observations and recommendation, please refresh your browser.</p>
-
-                <!-- Updating clock code -->
-                <script type="text/javascript">
-                    tday=new Array("Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday");
-                    tmonth=new Array("January","February","March","April","May","June","July","August","September","October","November","December");
-
-                    function GetClock(){
-                        var d=new Date();
-                        var nday=d.getDay(),nmonth=d.getMonth(),ndate=d.getDate(),nyear=d.getYear();
-                        if(nyear<1000) nyear+=1900;
-                        var nhour=d.getHours(),nmin=d.getMinutes(),nsec=d.getSeconds(),ap;
-
-                        if(nhour==0){ap=" AM";nhour=12;}
-                        else if(nhour<12){ap=" AM";}
-                        else if(nhour==12){ap=" PM";}
-                        else if(nhour>12){ap=" PM";nhour-=12;}
-
-                        if(nmin<=9) nmin="0"+nmin;
-                        if(nsec<=9) nsec="0"+nsec;
-
-                        document.getElementById('clockbox').innerHTML=""+tday[nday]+", "+tmonth[nmonth]+" "+ndate+", "+nyear+" "+nhour+":"+nmin+":"+nsec+ap+"";
-                    }
-
-                    window.onload=function(){
-                        GetClock();
-                        setInterval(GetClock,1000);
-                    }
-                </script>
-                <div id="clockbox">Thursday, May 18, 2017 10:29:59 AM</div>
-                <p></p>
-
-                <!-- Table Desktop CSS -->
-                <style type="text/css">
-                    html,
-                    body,
-                        #main {
-                            width: 100%;
-                            background-color: white;
-                            height: 30px;
-                            text-align: justify;
-                        }
-                        table { 
-                            table-layout: fixed;
-                            width: 100%;
-                            margin:auto;
-                            border-collapse: collapse; 
-                            cellspacing="0";
-                            cellpadding="10";
-                            align="center";
-                            style="color:#333333;
-                        }
-
-                        h1 {
-                            font-size: 200%;
-                        }
-
-                        /* Row formatting */
-                        td { 
-                            padding: 6px; 
-                            text-align: center; 
-                            color:#333333;
-                            border-right: 1px solid white;
-                        }
-
-                        /* Alternate colors for rows */
-                        tr:nth-child(even) { background-color: #D2DEEF; }
-                        tr:nth-child(odd) { background-color: #EAEFF7; }
-
-                        /* Header row formatting */
-                        th { 
-                            padding: 6px; 
-                            text-align: center; 
-                            background-color:#5B9BD5;
-                            font-weight: bold; 
-                            color: white;
-                        }
-                        .footer { 
-                            width: 80%;
-                            position: absolute;
-                            bottom: 0;
-                            height: 100px;
-                        }
-                </style>
-
-                <!-- Table code --> 
-                <div>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Station</th>
-                                <th>Temperature (&#176;F)</th>
-                                <th>Wind Speed (MPH)</th>
-                                <th>Time (CST)</th>
-                                <th>Low Temperature  (&#176;F)</th>
-                                <th>Time of Low Temperature (CST)</th>
-                                <th>High Temperature  (&#176;F)</th>
-                                <th>Time of High Temperature (CST)</th>
-                            </tr>
-                        </thead>
-                        <!-- Flask template for table rows -->
-                        <tbody>
-                            {% for result in results %}
-                            <tr>
-                                <td class="header" data-title="Station">{{ result[9] }}</td>
-                                {% if result[8] == False %}
-                                    {% if result[0] == True %}
-                                        <td data-title="Most Recent Temp" style="background-color:Crimson;">{{ result[1] }}</td>
-                                    {% else %}
-                                        <td data-title="Most Recent Temp" style="background-color:LightGreen;">{{ result[1] }}</td>
-                                    {% endif %}
-                                    <td data-title="Wind Speed (MPH)">{{ result[3] }}</td>
-                                    <td data-title="Temperature">{{ result[2] }}</td>
-                                    <td data-title="Low Temperature  (°F)">{{ result[4] }}</td>
-                                    <td data-title="Time of Low Temperature (CST)">{{ result[5] }}</td>
-                                    <td data-title="High Temperature (°F)">{{ result[6] }}</td>
-                                    <td data-title="Time of High Temperature (CST)">{{ result[7] }}</td>
-                                {% else %}
-                                    <td colspan="7" style="background-color:red;">The station is temporarily not working, and will be back up shortly</td>
-                                {% endif %}
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-                <p></p>
-                <p style="margin:0;text-align: justify;"><strong>Disclaimer:</strong> Weather data are provided by <a href = "http://deltaweather.extension.msstate.edu/stations"> the Delta Agricultural Weather Center, Mississippi State University 
-                    Extension, Stoneville, Mississippi</a>.  The research was conducted as a component of <a href = "https://www.ars.usda.gov/"> the United States Department of Agriculture (USDA), Agricultural 
-                    Research Service (ARS) </a>, under National Program 305 and was funded by <a href = " http://mssoy.org/"> the Mississippi Soybean Promotion Board (MSPB)</a>. The website was developed as 
-                    part of this research and was transferred to MSPB. The USDA ARS offers no guarantee or warranty and accepts no liability for any consequences arising 
-                    from the use of the information from the website.</p>
-                <p></p>
             </div>
         </div>
 
-        <!-- Map Code -->
-        <!-- Example code for maps here: https://www.taniarascia.com/google-maps-apis-for-multiple-locations/ -->
-        <div id="map"></div>
-        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAK4nlrHFpSQdWQ19NNPDw4_iA-e2d7KNg&callback=initMap"></script>
+        <div class="main">
+            This page provides weather data of interest to aerial applicators at various weather station locations in the Mississippi Delta and surrounding areas. Data include the most recent hourly measurements of air temperature and wind speed, as well as daily low and high temperature information up to the current time. In the second column, the latest temperature measurements are shown along with a color to indicate conditions for aerial applications. Green indicates a low potential for temperature inversion based on our background calculations, and conditions are favorable for aerial application currently at that location. Red indicates a high potential for temperature inversion, and aerial application is not recommended currently at that location.
 
-        <a name="map"><a/>
+            <p>Click <a href="#map">here</a> to go to the map.</p>
+            <p>For the latest observations and recommendation, please refresh your browser.</p>
+
+            <!-- Updating clock code -->
+            <script type="text/javascript">
+                tday = new Array("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday");
+                tmonth = new Array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
+
+                function GetClock() {
+                    var d = new Date();
+                    var nday = d.getDay(),
+                        nmonth = d.getMonth(),
+                        ndate = d.getDate(),
+                        nyear = d.getYear();
+                    if (nyear < 1000) nyear += 1900;
+                    var nhour = d.getHours(),
+                        nmin = d.getMinutes(),
+                        nsec = d.getSeconds(),
+                        ap;
+
+                    if (nhour == 0) {
+                        ap = " AM";
+                        nhour = 12;
+                    } else if (nhour < 12) {
+                        ap = " AM";
+                    } else if (nhour == 12) {
+                        ap = " PM";
+                    } else if (nhour > 12) {
+                        ap = " PM";
+                        nhour -= 12;
+                    }
+
+                    if (nmin <= 9) nmin = "0" + nmin;
+                    if (nsec <= 9) nsec = "0" + nsec;
+
+                    document.getElementById('clockbox').innerHTML = "" + tday[nday] + ", " + tmonth[nmonth] + " " + ndate + ", " + nyear + " " + nhour + ":" + nmin + ":" + nsec + ap + "";
+                }
+
+                window.onload = function() {
+                    GetClock();
+                    setInterval(GetClock, 1000);
+                }
+            </script>
+            <div id="clockbox">Thursday, May 18, 2017 10:29:59 AM</div>
+            <p></p>
+
+            <!-- Table Desktop CSS -->
+            <style type="text/css">
+                html,
+                body,
+                #main {
+                    width: 100%;
+                    background-color: white;
+                    height: 30px;
+                    text-align: justify;
+                }
+                
+                table {
+                    table-layout: fixed;
+                    width: 100%;
+                    margin: auto;
+                    border-collapse: collapse;
+                    cellspacing="0";
+                    cellpadding="10";
+                    align="center";
+                    style="color:#333333;
+
+                }
+                
+                h1 {
+                    font-size: 200%;
+                }
+                /* Row formatting */
+                
+                td {
+                    padding: 6px;
+                    text-align: center;
+                    color: #333333;
+                    border-right: 1px solid white;
+                }
+                /* Alternate colors for rows */
+                
+                tr:nth-child(even) {
+                    background-color: #D2DEEF;
+                }
+                
+                tr:nth-child(odd) {
+                    background-color: #EAEFF7;
+                }
+                /* Header row formatting */
+                
+                th {
+                    padding: 6px;
+                    text-align: center;
+                    background-color: #5B9BD5;
+                    font-weight: bold;
+                    color: white;
+                }
+                
+                .footer {
+                    width: 80%;
+                    position: absolute;
+                    bottom: 0;
+                    height: 100px;
+                }
+            </style>
+
+            <!-- Table code -->
+            <div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Station</th>
+                            <th>Temperature (&#176;F)</th>
+                            <th>Wind Speed (MPH)</th>
+                            <th>Time (CST)</th>
+                            <th>Low Temperature (&#176;F)</th>
+                            <th>Time of Low Temperature (CST)</th>
+                            <th>High Temperature (&#176;F)</th>
+                            <th>Time of High Temperature (CST)</th>
+                        </tr>
+                    </thead>
+                    <!-- Flask template for table rows -->
+                    <tbody>
+                        {% for result in results %}
+                        <tr>
+                            <td class="header" data-title="Station">{{ result[9] }}</td>
+                            {% if result[8] == False %} {% if result[0] == True %}
+                            <td data-title="Most Recent Temp" style="background-color:Crimson;">{{ result[1] }}</td>
+                            {% else %}
+                            <td data-title="Most Recent Temp" style="background-color:LightGreen;">{{ result[1] }}</td>
+                            {% endif %}
+                            <td data-title="Wind Speed (MPH)">{{ result[3] }}</td>
+                            <td data-title="Temperature">{{ result[2] }}</td>
+                            <td data-title="Low Temperature  (°F)">{{ result[4] }}</td>
+                            <td data-title="Time of Low Temperature (CST)">{{ result[5] }}</td>
+                            <td data-title="High Temperature (°F)">{{ result[6] }}</td>
+                            <td data-title="Time of High Temperature (CST)">{{ result[7] }}</td>
+                            {% else %}
+                            <td colspan="7" style="background-color:red;">The station is temporarily not working, and will be back up shortly</td>
+                            {% endif %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <p></p>
+            <p style="margin:0;text-align: justify;"><strong>Disclaimer:</strong> Weather data are provided by <a href="http://deltaweather.extension.msstate.edu/stations"> the Delta Agricultural Weather Center, Mississippi State University 
+                    Extension, Stoneville, Mississippi</a>. The research was conducted as a component of <a href="https://www.ars.usda.gov/"> the United States Department of Agriculture (USDA), Agricultural 
+                    Research Service (ARS) </a>, under National Program 305 and was funded by <a href=" http://mssoy.org/"> the Mississippi Soybean Promotion Board (MSPB)</a>. The website was developed as part of this research and was transferred to MSPB. The USDA ARS offers no guarantee or warranty and accepts no liability for any consequences arising from the use of the information from the website.</p>
+            <p></p>
+        </div>
+    </div>
+
+    <!-- Map Code -->
+    <!-- Example code for maps here: https://www.taniarascia.com/google-maps-apis-for-multiple-locations/ -->
+    <div id="map"></div>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAK4nlrHFpSQdWQ19NNPDw4_iA-e2d7KNg&callback=initMap"></script>
+
+    <a name="map"><a/>
 
         <!-- Map CSS -->
         <style type="text/css">
             html,
             body,
-                #map {
-                    width: 80%;
-                    height: 80%;
-                    margin-left: auto;
-                    margin-right: auto;
-                    margin-bottom: 50px;
-                }
+            #map {
+                width: 80%;
+                height: 80%;
+                margin-left: auto;
+                margin-right: auto;
+                margin-bottom: 50px;
+            }
         </style>
 
         <script type="text/javascript">
@@ -256,21 +270,21 @@
                     lat: 33.04,
                     long: -90.36
                 };
-                
+
                 var station11 = {
                     info: '<strong>DREC-Stoneville AWS</strong>\
                                 <br> Stoneville, MS<br>',
                     lat: 33.43122,
                     long: -90.91077
                 };
-                
+
                 var station12 = {
                     info: '<strong>DREC-Stoneville W</strong>\
                                 <br> Stoneville, MS<br>',
                     lat: 33.42269,
                     long: -90.957882
                 };
-                
+
                 var station13 = {
                     info: '<strong>ARS-Stoneville</strong>\
                                 <br> Stoneville, MS<br>',
@@ -280,18 +294,18 @@
 
                 <!-- and here -->
                 var locations = [
-                    [station1.info, station1.lat, station1.long, 0]
-                    ,[station2.info, station2.lat, station2.long, 1]
-                    ,[station3.info, station3.lat, station3.long, 2]
-                    ,[station4.info, station4.lat, station4.long, 3]
-                    ,[station5.info, station5.lat, station5.long, 4]
-                    ,[station6.info, station6.lat, station6.long, 5]
-                    ,[station7.info, station7.lat, station7.long, 6]
-                    ,[station8.info, station8.lat, station8.long, 7]
-                    ,[station9.info, station9.lat, station9.long, 8]
-                    ,[station10.info, station10.lat, station10.long, 9]
-                    ,[station11.info, station11.lat, station11.long, 10]
-                    ,[station12.info, station12.lat, station12.long, 11]
+                    [station1.info, station1.lat, station1.long, 0],
+                    [station2.info, station2.lat, station2.long, 1],
+                    [station3.info, station3.lat, station3.long, 2],
+                    [station4.info, station4.lat, station4.long, 3],
+                    [station5.info, station5.lat, station5.long, 4],
+                    [station6.info, station6.lat, station6.long, 5],
+                    [station7.info, station7.lat, station7.long, 6],
+                    [station8.info, station8.lat, station8.long, 7],
+                    [station9.info, station9.lat, station9.long, 8],
+                    [station10.info, station10.lat, station10.long, 9],
+                    [station11.info, station11.lat, station11.long, 10],
+                    [station12.info, station12.lat, station12.long, 11]
                 ];
 
                 var map = new google.maps.Map(document.getElementById('map'), {
@@ -310,8 +324,8 @@
                         map: map
                     });
 
-                    google.maps.event.addListener(marker, 'click', (function (marker, i) {
-                        return function () {
+                    google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                        return function() {
                             infowindow.setContent(locations[i][0]);
                             infowindow.open(map, marker);
                         }
@@ -324,7 +338,8 @@
             }
         </script>
         <div class="footer"></div>
-        <script src="//www.powr.io/powr.js?external-type=html"></script> 
+        <script src="//www.powr.io/powr.js?external-type=html"></script>
         <div class="powr-hit-counter" id="f11be29c_1518808764"></div>
-    </body>
+</body>
+
 </html>
