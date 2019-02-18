@@ -420,9 +420,7 @@ def tempInvFromCSV(data):
 
 
 def main():
-    htmlURLs = [("http://deltaweather.extension.msstate.edu/7-days-hourly-table/DREC-2010", "Bee Lake"),
-                ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/DREC-2006", "Brooksville"),
-                ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/DREC-2011", "Jackson Co."),
+    htmlURLs = [("http://deltaweather.extension.msstate.edu/7-days-hourly-table/DREC-2006", "Brooksville"),
                 ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/DREC-2001", "Lyon"),
                 ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/DREC-2013", "Mound Bayou"),
                 ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/DREC-2007", "Prairie"),
