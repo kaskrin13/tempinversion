@@ -431,7 +431,7 @@ def main():
                 ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/DREC-2004", "Stoneville AWS"),
                 ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/DREC-2015", "Stoneville F10"),
                 ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/DREC-2014", "Stoneville W"),
-                ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/DREC-2002", "Thighman Lake"),
+                ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/DREC-2002", "Thighman"),
                 ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/DREC-2005", "Verona")]
     
     # uncomment to add ARS weather stations back
