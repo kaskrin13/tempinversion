@@ -9,6 +9,7 @@ import urllib.request
 import codecs
 import csv
 import sys
+import math
 
 # goes to a website, finds a table on the page and inserts it into a 2d list
 # then processes the data added to table (covert text to necessary formats)
@@ -17,10 +18,15 @@ import sys
 # output: todaysData = 2d list
 def getDataFromHTML(url):
     # get html from website
-    html = requests.get(url)
+    html = requests.get(url, stream=True)
 
     # get table from html
     data = [[cell.text.strip() for cell in row('td')] for row in bs4.BeautifulSoup(html.content, "html5lib")('tr')]
+
+    # if no table is found return an empty list
+    if not data:
+        return data
+
     # add column labels
     data[0] = ['Record Date', 'Record Time', 'Record Julian Date', 'Air Temp Max', 'Time Max Air Temp', 'Air Temp Min',
                'Time Min Air Temp', 'Air Temp Obs', 'Rel Hum Max', 'Time Max Rel Hum', 'Rel Hum Min',
@@ -207,7 +213,6 @@ def updatedLastHour(mostRecentTime):
     now = utcToLocal(datetime.datetime.utcnow())
     
     delta = now - mostRecentTime
-    print(delta.seconds/60)
     sys.stdout.flush()
 
     # Check if more than an two hours and ten minutes has passed
@@ -320,6 +325,17 @@ def tempInvFromHTML(data):
     lowTemp = getLowTempFromHTML(data)
     highTemp = getHighTempFromHTML(data)
 
+    # Check if values are valid
+    # If not return empty result
+    if math.isnan(mostRecentTemp):
+        return [True, 0, 0, 0, 0, 0, 0, 0, True]
+    if math.isnan(mostRecentWindSpeed):
+        return [True, 0, 0, 0, 0, 0, 0, 0, True]
+    if math.isnan(lowTemp[0]):
+        return [True, 0, 0, 0, 0, 0, 0, 0, True]
+    if math.isnan(highTemp[0]):
+        return [True, 0, 0, 0, 0, 0, 0, 0, True]
+
     # Determine if there is an inversion
     # Check if before noon
     if (mostRecentTime.time() < datetime.time(12)):
@@ -420,11 +436,26 @@ def tempInvFromCSV(data):
 
 
 def main():
-    htmlURLs = [("http://deltaweather.extension.msstate.edu/7-days-hourly-table/DS-0003", "Catladge Farm"),
+    htmlURLs = [("http://deltaweather.extension.msstate.edu/7-days-hourly-table/VT2018-0001", "Aberdeen VTcr"),
+                ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/VT2018-0001", "Bee Lake"),
+                ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/VT2018-0001", "Brooksville"),
+                ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/VT2018-0001", "Brooksville 2 VTso"),
+                ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/VT2018-0001", "Brown Loam Exp Stn VT"),
+                ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/VT2018-0001", "Brown Loam Exp Stn"),
+                ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/DS-0003", "Catladge Farm"),
+                ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/VT2018-0006", "Clarksdale VTso"),
                 ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/DS-0002", "Cleveland"),
+                ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/COOP-Stoneville", "COOP Stoneville"),
                 ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/DS-0001", "Cypress Farm"),
+                ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/DREC-2011", "Jackson Co"),
+                ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/VT2018-0007", "Longwood VTso"),
                 ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/DREC-2001", "Lyon"),
+                ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/VT2019-0008", "Macon VTcr"),
                 ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/DREC-2013", "Mound Bayou"),
+                ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/VT2018-0005", "Olive Branch VTcr"),
+                ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/VT2018-0009", "Olive Branch 2 VTcr"),
+                ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/VT2018-0010", "Onward VT"),
+                ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/COOP-0002", "Pontotoc AWS COOP"),
                 ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/DREC-2007", "Prairie"),
                 ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/DREC-2003", "Sidon"),
                 ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/DREC-2012", "Stockett Farm"),
@@ -432,7 +463,10 @@ def main():
                 ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/DREC-2015", "Stoneville F10"),
                 ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/DREC-2014", "Stoneville W"),
                 ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/DREC-2002", "Thighman"),
-                ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/DREC-2005", "Verona")]
+                ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/VT2018-0012", "Tippo VT"),
+                ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/DREC-2005", "Tribbett"),
+                ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/DREC-2005", "Verona"),
+                ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/VT2018-0004", "Verona VTso")]
     
     # uncomment to add ARS weather stations back
     #csvURLs = [("https://thingspeak.com/channels/211013/feed.csv", "Stoneville ARS 1"),
