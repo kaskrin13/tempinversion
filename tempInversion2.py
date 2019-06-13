@@ -492,7 +492,7 @@ def main():
                 ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/DREC-2002", "Thighman"),
                 ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/VT2018-0012", "Tippo VT"),
                 ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/DREC-2005", "Tribbett"),
-                ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/DREC-2005", "Verona")]#,
+                ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/DREC-2005", "Verona")],
                 ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/VT2018-0004", "Verona VTso")]
  
     p = Pool(len(htmlURLs))
