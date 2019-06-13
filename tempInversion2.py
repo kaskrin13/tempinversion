@@ -10,6 +10,7 @@ import codecs
 import csv
 import sys
 import math
+from multiprocessing import Pool
 
 # goes to a website, finds a table on the page and inserts it into a 2d list
 # then processes the data added to table (covert text to necessary formats)
@@ -154,6 +155,8 @@ def printData(data):
     table = [fmt.format(*row) for row in s]
     print('\n'.join(table))
 
+
+
 # prints a list of results for error checking with a label
 # input: results = 2d list
 def printResults(results):
@@ -163,6 +166,8 @@ def printResults(results):
     print("-" * 189)
     for result in results:
         printResult(result)
+
+
 
 # prints the result of the tempInv function in a readible format for error checking
 # input: result = list
@@ -182,6 +187,8 @@ def daylightSavings(zonename):
     now = pytz.utc.localize(datetime.datetime.utcnow())
     return now.astimezone(tz).dst() != datetime.timedelta(0)
 
+
+
 # converts datetime object from UTC to local timezone
 # input: utc = datetime
 # output: utc+offset = datetime
@@ -193,6 +200,8 @@ def utcToLocal(utc):
     else:
         return pytz.utc.localize(utc, is_dst=False).astimezone(tz)
 
+
+
 # makes a datetime object timezone aware
 # input: time = datetime
 # output: time = datetime
@@ -203,6 +212,8 @@ def makeTimeAware(time):
         return tz.localize(time, is_dst=True).astimezone(tz)
     else:
         return tz.localize(time, is_dst=False).astimezone(tz)
+
+
 
 # checks if more than an hour has passed since the data was last updated
 # returns true if it has, false if not
@@ -239,6 +250,8 @@ def getLowTempFromHTML(data):
             index = i
     return (lowTemp, index)
 
+
+
 # gets highest temperature of the day by
 # searching entries in table (2d list) between the beginning
 # of the current day and the last entry (most recent time)
@@ -254,6 +267,8 @@ def getHighTempFromHTML(data):
             highTemp = data[i][2]
             index = i
     return (highTemp, index)
+
+
 
 # gets lowest temperature of the day by
 # searching entries in table (2d list) between the beginning
@@ -276,6 +291,8 @@ def getLowTempFromCSV(mostRecentTime, data):
             lowTemp = currentDay[i][2]
             index = i
     return (lowTemp, currentDay[index][0])
+
+
 
 # gets highest temperature of the day by
 # searching entries in table (2d list) between the beginning
@@ -377,6 +394,8 @@ def tempInvFromHTML(data):
                     return [True, mostRecentTemp, str(mostRecentTime.time()), mostRecentWindSpeed, lowTemp[0],
                             data[lowTemp[1]][5], highTemp[0], data[highTemp[1]][3], moreThanAnHour]
 
+
+
 # determines whether there is a temperature inversion
 # returns true if there is an inversion or false if not
 def tempInvFromCSV(data):
@@ -435,6 +454,14 @@ def tempInvFromCSV(data):
 
 
 
+def threadingWrapper(HTMLtup):
+        data = getDataFromHTML(HTMLtup[0])
+        result = tempInvFromHTML(data)
+        result.append(HTMLtup[1])
+        return result
+
+
+
 def main():
     htmlURLs = [#("http://deltaweather.extension.msstate.edu/7-days-hourly-table/VT2018-0001", "Aberdeen VTcr"),
                 #("http://deltaweather.extension.msstate.edu/7-days-hourly-table/VT2018-0001", "Bee Lake"),
@@ -467,33 +494,12 @@ def main():
                 ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/DREC-2005", "Tribbett"),
                 ("http://deltaweather.extension.msstate.edu/7-days-hourly-table/DREC-2005", "Verona")]#,
                 #("http://deltaweather.extension.msstate.edu/7-days-hourly-table/VT2018-0004", "Verona VTso")]
-    
-    # uncomment to add ARS weather stations back
-    #csvURLs = [("https://thingspeak.com/channels/211013/feed.csv", "Stoneville ARS 1"),
-    #           ("https://thingspeak.com/channels/282031/feed.csv", "Stoneville ARS 2"),
-    #           ("https://thingspeak.com/channels/216976/feed.csv", "Stoneville ARS 3"),
-    #           ("https://thingspeak.com/channels/287811/feed.csv", "Stoneville ARS 2B"),
-    #           ("https://thingspeak.com/channels/288782/feed.csv", "Stoneville ARS 3B")]
-
-    results = []
-
-    for i in range(0, len(htmlURLs), 1):
-        data = getDataFromHTML(htmlURLs[i][0])
-        result = tempInvFromHTML(data)
-        results.append(result)
-        results[i].append(htmlURLs[i][1])
-		
-    printResults(results)
-
-    # uncomment to add ARS weather stations back
-    #for url in csvURLs:
-    #    data = getDataFromCSV(url[0])
-    #    result = tempInvFromCSV(data)
-    #    result.append(url[1])
-    #    results.append(result)
+ 
+    p = Pool(len(htmlURLs))
+    results = p.map(threadingWrapper, htmlURLs)
+    #printResults(results)
 
     return results
-
 
 if __name__ == "__main__":
     main()
