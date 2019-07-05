@@ -458,7 +458,7 @@ def threadingWrapper(HTMLtup):
         data = getDataFromHTML(HTMLtup[0])
         result = tempInvFromHTML(data)
         result.append(HTMLtup[1])
-	printData(data)
+        printData(data)
         return result
 
 
