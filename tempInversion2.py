@@ -10,6 +10,7 @@ import codecs
 import csv
 import sys
 import math
+import lxml
 from multiprocessing import Pool
 
 # goes to a website, finds a table on the page and inserts it into a 2d list
@@ -22,7 +23,7 @@ def getDataFromHTML(url):
     html = requests.get(url, stream=True)
 
     # get table from html
-    data = [[cell.text.strip() for cell in row('td')] for row in bs4.BeautifulSoup(html.content, "html5lib")('tr')]
+    data = [[cell.text.strip() for cell in row('td')] for row in bs4.BeautifulSoup(html.content, "lxml")('tr')]
 
     # if no table is found return an empty list
     if not data:
@@ -56,26 +57,7 @@ def getDataFromHTML(url):
 
     # convert text to float for temperature, humidity, precipitation, and wind speed
     # if data is blank use NaN (not a number)
-    for i in range(1, len(data), 1):
-        if (data[i][2] == ''):
-            data[i][2] = float('NaN')
-        else:
-            data[i][2] = float(data[i][2])
-
-        if (data[i][4] == ''):
-            data[i][4] = float('NaN')
-        else:
-            data[i][4] = float(data[i][4])
-
-        if (data[i][6] == ''):
-            data[i][6] = float('NaN')
-        else:
-            data[i][6] = float(data[i][6])
-
-        if (data[i][7] == ''):
-            data[i][7] = float('NaN')
-        else:
-            data[i][7] = float(data[i][7])
+    data = [[float('NaN') if item == '' else item for item in row] for row in data]
 
     # place data from today's date in a seperate table
     todaysData = []

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> Temperature Inversion V2 </title>
+    <link rel="stylesheet" type="text/css" href="static/css/style.css">
+    <script src="static/js/jquery-3.4.1.min.js"></script>
+    <script src="static/js/main.js"></script>
+</head>
+
+<body>
+    <div id="loader-wrapper">
+        <div id="loader"></div>
+
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>    
+    </div>
+
+    <div id="content">
+        <div class="header">
+            <h1 align="center">
+                Daily Determination of Atmospheric Stability for Aerial Applicators in the Mississippi Delta
+            </h1>
+        </div>
+
+        <div class="main">
+            This page provides weather data of interest to aerial applicators at various weather station locations in the Mississippi Delta and surrounding areas. Data include the most recent hourly measurements of air temperature and wind speed, as well as daily low and high temperature information up to the current time. In the second column, the latest temperature measurements are shown along with a color to indicate conditions for aerial applications. Green indicates a low potential for temperature inversion based on our background calculations, and conditions are favorable for aerial application currently at that location. Red indicates a high potential for temperature inversion, and aerial application is not recommended currently at that location.
+
+            <p>Click <a href="#map">here</a> to go to the map.</p>
+            <p>For the latest observations and recommendation, please refresh your browser.</p>
+
+            <div id="clockbox">Thursday, May 18, 2017 10:29:59 AM</div>
+            <p></p>
+
+            <!-- Table code -->
+            <div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Station</th>
+                            <th>Temperature (&#176;F)</th>
+                            <th>Wind Speed (MPH)</th>
+                            <th>Time (CST)</th>
+                            <th>Low Temperature (&#176;F)</th>
+                            <th>Time of Low Temperature (CST)</th>
+                            <th>High Temperature (&#176;F)</th>
+                            <th>Time of High Temperature (CST)</th>
+                        </tr>
+                    </thead>
+                    <!-- Flask template for table rows -->
+                    <tbody>
+                        {%- for result in results -%}
+                            <tr>
+                                <td class="header" data-title="Station">{{ result[9] }}</td>
+                                {%- if result[8] == False -%} 
+                                    {%- if result[0] == True -%}
+                                        <td data-title="Most Recent Temp" style="background-color:Crimson;">{{ result[1] }}</td>
+                                    {%- else -%}
+                                        <td data-title="Most Recent Temp" style="background-color:LightGreen;">{{ result[1] }}</td>
+                                    {%- endif -%}
+                                    <td data-title="Wind Speed (MPH)">{{ result[3] }}</td>
+                                    <td data-title="Temperature">{{ result[2] }}</td>
+                                    <td data-title="Low Temperature  (°F)">{{ result[4] }}</td>
+                                    <td data-title="Time of Low Temperature (CST)">{{ result[5] }}</td>
+                                    <td data-title="High Temperature (°F)">{{ result[6] }}</td>
+                                    <td data-title="Time of High Temperature (CST)">{{ result[7] }}</td>
+                                {%- else -%}
+                                    <td colspan="7" style="background-color:red;"><strong>The station is temporarily not working, and will be back up shortly</strong></td>
+                                {%- endif -%}
+                            </tr>
+                        {%- endfor -%}
+                    </tbody>
+                </table>
+            </div>
+            <p></p>
+            <p style="margin:0;text-align: justify;"><strong>Disclaimer:</strong> Weather data are provided by <a href="http://www.deltaweather.extension.msstate.edu/stations"> the Delta Agricultural Weather Center, Mississippi State University 
+                    Extension, Stoneville, Mississippi</a>. The research was conducted as a component of <a href="https://www.ars.usda.gov/"> the United States Department of Agriculture (USDA), Agricultural 
+                    Research Service (ARS) </a>, under National Program 305 and was funded by <a href=" http://mssoy.org/"> the Mississippi Soybean Promotion Board (MSPB)</a>. The website was developed as part of this research and was transferred to MSPB. The USDA ARS offers no guarantee or warranty and accepts no liability for any consequences arising from the use of the information from the website.</p>
+            <p></p>
+        </div>
+    </div>
+
+    <!-- Map Code -->
+    <div id="map"></div>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0nf_UtMvmcVf7LvdLrxI6quPis9Abotw&callback=initMap"></script>
+    <a name="map"><a/>        
+    
+    <div class="footer"></div>
+</body>
+
+</html>
