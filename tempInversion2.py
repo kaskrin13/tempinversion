@@ -57,7 +57,26 @@ def getDataFromHTML(url):
 
     # convert text to float for temperature, humidity, precipitation, and wind speed
     # if data is blank use NaN (not a number)
-    data = [[float('NaN') if item == '' else item for item in row] for row in data]
+    for i in range(1, len(data), 1):
+        if (data[i][2] == ''):
+            data[i][2] = float('NaN')
+        else:
+            data[i][2] = float(data[i][2])
+
+        if (data[i][4] == ''):
+            data[i][4] = float('NaN')
+        else:
+            data[i][4] = float(data[i][4])
+
+        if (data[i][6] == ''):
+            data[i][6] = float('NaN')
+        else:
+            data[i][6] = float(data[i][6])
+
+        if (data[i][7] == ''):
+            data[i][7] = float('NaN')
+        else:
+            data[i][7] = float(data[i][7])
 
     # place data from today's date in a seperate table
     todaysData = []
@@ -440,8 +459,6 @@ def threadingWrapper(HTMLtup):
         data = getDataFromHTML(HTMLtup[0])
         result = tempInvFromHTML(data)
         result.append(HTMLtup[1])
-        print(HTMLtup[1])
-        printData(data)
         return result
 
 

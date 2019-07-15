@@ -331,5 +331,5 @@ function initMap() {
 $(document).ready(function() {
     setTimeout(function(){
         $('body').addClass('loaded');
-    }, 10000); /* Loading time, currently 10s */
+    }, 3000); /* Loading time, currently 3s */
 });
